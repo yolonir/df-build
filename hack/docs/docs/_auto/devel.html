@@ -1,0 +1,594 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Development Scripts &#8212; DFHack 0.47.05-r1 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/dfhack.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../_static/dfhack-icon.ico"/>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bugfixing Scripts" href="fix.html" />
+    <link rel="prev" title="Basic Scripts" href="base.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/dfhack-logo.png" alt="Logo"/>
+    <h3 class="logo logo-name">Home</h3>
+  </a>
+</p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../Scripts.html">DFHack Scripts</a><ul>
+      <li>Previous: <a href="base.html" title="previous chapter">Basic Scripts</a></li>
+      <li>Next: <a href="fix.html" title="next chapter">Bugfixing Scripts</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Development Scripts</a><ul>
+<li><a class="reference internal" href="#devel-all-bob">devel/all-bob</a></li>
+<li><a class="reference internal" href="#devel-annc-monitor">devel/annc-monitor</a></li>
+<li><a class="reference internal" href="#devel-check-other-ids">devel/check-other-ids</a></li>
+<li><a class="reference internal" href="#devel-check-release">devel/check-release</a></li>
+<li><a class="reference internal" href="#devel-clear-script-env">devel/clear-script-env</a></li>
+<li><a class="reference internal" href="#devel-click-monitor">devel/click-monitor</a></li>
+<li><a class="reference internal" href="#devel-cmptiles">devel/cmptiles</a></li>
+<li><a class="reference internal" href="#devel-dump-offsets">devel/dump-offsets</a></li>
+<li><a class="reference internal" href="#devel-export-dt-ini">devel/export-dt-ini</a></li>
+<li><a class="reference internal" href="#devel-find-offsets">devel/find-offsets</a></li>
+<li><a class="reference internal" href="#devel-find-primitive">devel/find-primitive</a></li>
+<li><a class="reference internal" href="#devel-find-twbt">devel/find-twbt</a></li>
+<li><a class="reference internal" href="#devel-inject-raws">devel/inject-raws</a></li>
+<li><a class="reference internal" href="#devel-inspect-screen">devel/inspect-screen</a></li>
+<li><a class="reference internal" href="#devel-kill-hf">devel/kill-hf</a></li>
+<li><a class="reference internal" href="#devel-light">devel/light</a></li>
+<li><a class="reference internal" href="#devel-list-filters">devel/list-filters</a></li>
+<li><a class="reference internal" href="#devel-lsmem">devel/lsmem</a></li>
+<li><a class="reference internal" href="#devel-lua-example">devel/lua-example</a></li>
+<li><a class="reference internal" href="#devel-modstate-monitor">devel/modstate-monitor</a></li>
+<li><a class="reference internal" href="#devel-nuke-items">devel/nuke-items</a></li>
+<li><a class="reference internal" href="#devel-pop-screen">devel/pop-screen</a></li>
+<li><a class="reference internal" href="#devel-prepare-save">devel/prepare-save</a></li>
+<li><a class="reference internal" href="#devel-print-args">devel/print-args</a></li>
+<li><a class="reference internal" href="#devel-print-args2">devel/print-args2</a></li>
+<li><a class="reference internal" href="#devel-print-event">devel/print-event</a></li>
+<li><a class="reference internal" href="#devel-query">devel/query</a></li>
+<li><a class="reference internal" href="#devel-save-version">devel/save-version</a></li>
+<li><a class="reference internal" href="#devel-sc">devel/sc</a></li>
+<li><a class="reference internal" href="#devel-scanitemother">devel/scanitemother</a></li>
+<li><a class="reference internal" href="#devel-send-key">devel/send-key</a></li>
+<li><a class="reference internal" href="#devel-spawn-unit-helper">devel/spawn-unit-helper</a></li>
+<li><a class="reference internal" href="#devel-test-perlin">devel/test-perlin</a></li>
+<li><a class="reference internal" href="#devel-unforbidall">devel/unforbidall</a></li>
+<li><a class="reference internal" href="#devel-unit-path">devel/unit-path</a></li>
+<li><a class="reference internal" href="#devel-visualize-structure">devel/visualize-structure</a></li>
+<li><a class="reference internal" href="#devel-watch-minecarts">devel/watch-minecarts</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="development-scripts">
+<span id="scripts-devel"></span><h1>Development Scripts<a class="headerlink" href="#development-scripts" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">devel/*</span></code> scripts are intended for developer use, but many may
+be of interest to anyone investigating odd phenomena or just messing
+around.  They are documented to encourage such inquiry.</p>
+<p>Some can PERMANENTLY DAMAGE YOUR SAVE if misused, so please be careful.
+The warnings are real; if in doubt make backups before running the command.</p>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#devel-all-bob" id="id38">devel/all-bob</a></p></li>
+<li><p><a class="reference internal" href="#devel-annc-monitor" id="id39">devel/annc-monitor</a></p></li>
+<li><p><a class="reference internal" href="#devel-check-other-ids" id="id40">devel/check-other-ids</a></p></li>
+<li><p><a class="reference internal" href="#devel-check-release" id="id41">devel/check-release</a></p></li>
+<li><p><a class="reference internal" href="#devel-clear-script-env" id="id42">devel/clear-script-env</a></p></li>
+<li><p><a class="reference internal" href="#devel-click-monitor" id="id43">devel/click-monitor</a></p></li>
+<li><p><a class="reference internal" href="#devel-cmptiles" id="id44">devel/cmptiles</a></p></li>
+<li><p><a class="reference internal" href="#devel-dump-offsets" id="id45">devel/dump-offsets</a></p></li>
+<li><p><a class="reference internal" href="#devel-export-dt-ini" id="id46">devel/export-dt-ini</a></p></li>
+<li><p><a class="reference internal" href="#devel-find-offsets" id="id47">devel/find-offsets</a></p></li>
+<li><p><a class="reference internal" href="#devel-find-primitive" id="id48">devel/find-primitive</a></p></li>
+<li><p><a class="reference internal" href="#devel-find-twbt" id="id49">devel/find-twbt</a></p></li>
+<li><p><a class="reference internal" href="#devel-inject-raws" id="id50">devel/inject-raws</a></p></li>
+<li><p><a class="reference internal" href="#devel-inspect-screen" id="id51">devel/inspect-screen</a></p></li>
+<li><p><a class="reference internal" href="#devel-kill-hf" id="id52">devel/kill-hf</a></p></li>
+<li><p><a class="reference internal" href="#devel-light" id="id53">devel/light</a></p></li>
+<li><p><a class="reference internal" href="#devel-list-filters" id="id54">devel/list-filters</a></p></li>
+<li><p><a class="reference internal" href="#devel-lsmem" id="id55">devel/lsmem</a></p></li>
+<li><p><a class="reference internal" href="#devel-lua-example" id="id56">devel/lua-example</a></p></li>
+<li><p><a class="reference internal" href="#devel-modstate-monitor" id="id57">devel/modstate-monitor</a></p></li>
+<li><p><a class="reference internal" href="#devel-nuke-items" id="id58">devel/nuke-items</a></p></li>
+<li><p><a class="reference internal" href="#devel-pop-screen" id="id59">devel/pop-screen</a></p></li>
+<li><p><a class="reference internal" href="#devel-prepare-save" id="id60">devel/prepare-save</a></p></li>
+<li><p><a class="reference internal" href="#devel-print-args" id="id61">devel/print-args</a></p></li>
+<li><p><a class="reference internal" href="#devel-print-args2" id="id62">devel/print-args2</a></p></li>
+<li><p><a class="reference internal" href="#devel-print-event" id="id63">devel/print-event</a></p></li>
+<li><p><a class="reference internal" href="#devel-query" id="id64">devel/query</a></p></li>
+<li><p><a class="reference internal" href="#devel-save-version" id="id65">devel/save-version</a></p></li>
+<li><p><a class="reference internal" href="#devel-sc" id="id66">devel/sc</a></p></li>
+<li><p><a class="reference internal" href="#devel-scanitemother" id="id67">devel/scanitemother</a></p></li>
+<li><p><a class="reference internal" href="#devel-send-key" id="id68">devel/send-key</a></p></li>
+<li><p><a class="reference internal" href="#devel-spawn-unit-helper" id="id69">devel/spawn-unit-helper</a></p></li>
+<li><p><a class="reference internal" href="#devel-test-perlin" id="id70">devel/test-perlin</a></p></li>
+<li><p><a class="reference internal" href="#devel-unforbidall" id="id71">devel/unforbidall</a></p></li>
+<li><p><a class="reference internal" href="#devel-unit-path" id="id72">devel/unit-path</a></p></li>
+<li><p><a class="reference internal" href="#devel-visualize-structure" id="id73">devel/visualize-structure</a></p></li>
+<li><p><a class="reference internal" href="#devel-watch-minecarts" id="id74">devel/watch-minecarts</a></p></li>
+</ul>
+</div>
+<div class="section" id="devel-all-bob">
+<span id="id1"></span><h2><a class="toc-backref" href="#id38">devel/all-bob</a><a class="headerlink" href="#devel-all-bob" title="Permalink to this headline">¶</a></h2>
+<p>Changes the first name of all units to “Bob”.
+Useful for testing <a class="reference internal" href="modtools.html#modtools-interaction-trigger"><span class="std std-ref">modtools/interaction-trigger</span></a> events.</p>
+</div>
+<div class="section" id="devel-annc-monitor">
+<span id="id2"></span><h2><a class="toc-backref" href="#id39">devel/annc-monitor</a><a class="headerlink" href="#devel-annc-monitor" title="Permalink to this headline">¶</a></h2>
+<p>Displays announcements and reports in the console.</p>
+<dl class="field-list simple">
+<dt class="field-odd">enable|start</dt>
+<dd class="field-odd"><p>Begins monitoring</p>
+</dd>
+<dt class="field-even">disable|stop</dt>
+<dd class="field-even"><p>Stops monitoring</p>
+</dd>
+<dt class="field-odd">interval X</dt>
+<dd class="field-odd"><p>Sets the delay between checks for
+new announcements to <code class="docutils literal notranslate"><span class="pre">X</span></code> frames</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="devel-check-other-ids">
+<span id="id3"></span><h2><a class="toc-backref" href="#id40">devel/check-other-ids</a><a class="headerlink" href="#devel-check-other-ids" title="Permalink to this headline">¶</a></h2>
+<p>This script runs through all world.items.other and world.buildings.other vectors
+and verifies that the items contained in them have the expected types.</p>
+</div>
+<div class="section" id="devel-check-release">
+<span id="id4"></span><h2><a class="toc-backref" href="#id41">devel/check-release</a><a class="headerlink" href="#devel-check-release" title="Permalink to this headline">¶</a></h2>
+<p>Basic checks for release readiness</p>
+</div>
+<div class="section" id="devel-clear-script-env">
+<span id="id5"></span><h2><a class="toc-backref" href="#id42">devel/clear-script-env</a><a class="headerlink" href="#devel-clear-script-env" title="Permalink to this headline">¶</a></h2>
+<p>Clears the environment of the specified lua script(s).</p>
+</div>
+<div class="section" id="devel-click-monitor">
+<span id="id6"></span><h2><a class="toc-backref" href="#id43">devel/click-monitor</a><a class="headerlink" href="#devel-click-monitor" title="Permalink to this headline">¶</a></h2>
+<p>Displays the grid coordinates of mouse clicks in the console.
+Useful for plugin/script development.</p>
+<p>Usage: <code class="docutils literal notranslate"><span class="pre">devel/click-monitor</span> <span class="pre">start|stop</span></code></p>
+</div>
+<div class="section" id="devel-cmptiles">
+<span id="id7"></span><h2><a class="toc-backref" href="#id44">devel/cmptiles</a><a class="headerlink" href="#devel-cmptiles" title="Permalink to this headline">¶</a></h2>
+<p>Lists and/or compares two tiletype material groups.</p>
+<p>Usage: <code class="docutils literal notranslate"><span class="pre">devel/cmptiles</span> <span class="pre">material1</span> <span class="pre">[material2]</span></code></p>
+</div>
+<div class="section" id="devel-dump-offsets">
+<span id="id8"></span><h2><a class="toc-backref" href="#id45">devel/dump-offsets</a><a class="headerlink" href="#devel-dump-offsets" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>THIS SCRIPT IS STRICTLY FOR DFHACK DEVELOPERS.</p>
+<p>Running this script on a new DF version will NOT
+MAKE IT RUN CORRECTLY if any data structures
+changed, thus possibly leading to CRASHES AND/OR
+PERMANENT SAVE CORRUPTION.</p>
+</div>
+<p>This dumps the contents of the table of global addresses (new in 0.44.01).</p>
+<p>Passing global names as arguments calls setAddress() to set those globals’
+addresses in-game. Passing “all” does this for all globals.</p>
+</div>
+<div class="section" id="devel-export-dt-ini">
+<span id="id9"></span><h2><a class="toc-backref" href="#id46">devel/export-dt-ini</a><a class="headerlink" href="#devel-export-dt-ini" title="Permalink to this headline">¶</a></h2>
+<p>Exports an ini file containing memory addresses for Dwarf Therapist.</p>
+</div>
+<div class="section" id="devel-find-offsets">
+<span id="id10"></span><h2><a class="toc-backref" href="#id47">devel/find-offsets</a><a class="headerlink" href="#devel-find-offsets" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>THIS SCRIPT IS STRICTLY FOR DFHACK DEVELOPERS.</p>
+<p>Running this script on a new DF version will NOT
+MAKE IT RUN CORRECTLY if any data structures
+changed, thus possibly leading to CRASHES AND/OR
+PERMANENT SAVE CORRUPTION.</p>
+</div>
+<p>Finding the first few globals requires this script to be
+started immediately after loading the game, WITHOUT
+first loading a world. The rest expect a loaded save,
+not a fresh embark. Finding current_weather requires
+a special save previously processed with <a class="reference internal" href="#devel-prepare-save"><span class="std std-ref">devel/prepare-save</span></a>
+on a DF version with working dfhack.</p>
+<p>The script expects vanilla game configuration, without
+any custom tilesets or init file changes. Never unpause
+the game unless instructed. When done, quit the game
+without saving using ‘die’.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><p>global names to force finding them</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">all</span></code> to force all globals</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nofeed</span></code> to block automated fake input searches</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nozoom</span></code> to disable neighboring object heuristics</p></li>
+</ul>
+</div>
+<div class="section" id="devel-find-primitive">
+<span id="id11"></span><h2><a class="toc-backref" href="#id48">devel/find-primitive</a><a class="headerlink" href="#devel-find-primitive" title="Permalink to this headline">¶</a></h2>
+<p>Finds a primitive variable in DF’s data section, relying on the user to change
+its value. This is similar to <a class="reference internal" href="#devel-find-offsets"><span class="std std-ref">devel/find-offsets</span></a>, but useful for new variables
+whose locations are unknown (i.e. they could be part of an existing global).</p>
+<p>Usage:</p>
+<div class="highlight-dfhack notranslate"><div class="highlight"><pre><span></span>devel/find-primitive data-type val1 val2 [val3...]
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">data-type</span></code> is a primitive type (int32_t, uint8_t, long, etc.) and each
+<code class="docutils literal notranslate"><span class="pre">val</span></code> is a valid value for that type.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">devel/find-primitive</span> <span class="pre">help</span></code> for a list of valid data types.</p>
+</div>
+<div class="section" id="devel-find-twbt">
+<span id="id12"></span><h2><a class="toc-backref" href="#id49">devel/find-twbt</a><a class="headerlink" href="#devel-find-twbt" title="Permalink to this headline">¶</a></h2>
+<p>Finds some TWBT-related offsets - currently just <code class="docutils literal notranslate"><span class="pre">twbt_render_map</span></code>.</p>
+</div>
+<div class="section" id="devel-inject-raws">
+<span id="id13"></span><h2><a class="toc-backref" href="#id50">devel/inject-raws</a><a class="headerlink" href="#devel-inject-raws" title="Permalink to this headline">¶</a></h2>
+<p>WARNING: THIS SCRIPT CAN PERMANENLY DAMAGE YOUR SAVE.</p>
+<p>This script attempts to inject new raw objects into your
+world. If the injected references do not match the actual
+edited raws, your save will refuse to load, or load but crash.</p>
+<p>This script can handle reaction, item and building definitions.</p>
+<p>The savegame contains a list of the relevant definition tokens in
+the right order, but all details are read from raws every time.
+This allows just adding stub definitions, and simply saving and
+reloading the game.</p>
+<p>This is useful enough for modders and some users to justify the danger.</p>
+<p>Usage example:</p>
+<div class="highlight-dfhack notranslate"><div class="highlight"><pre><span></span>devel/inject-raws trapcomp ITEM_TRAPCOMP_STEAM_PISTON workshop STEAM_ENGINE MAGMA_STEAM_ENGINE reaction STOKE_BOILER
+</pre></div>
+</div>
+</div>
+<div class="section" id="devel-inspect-screen">
+<span id="id14"></span><h2><a class="toc-backref" href="#id51">devel/inspect-screen</a><a class="headerlink" href="#devel-inspect-screen" title="Permalink to this headline">¶</a></h2>
+<p>Read the tiles from the screen and display info about them.</p>
+</div>
+<div class="section" id="devel-kill-hf">
+<span id="id15"></span><h2><a class="toc-backref" href="#id52">devel/kill-hf</a><a class="headerlink" href="#devel-kill-hf" title="Permalink to this headline">¶</a></h2>
+<p>Kills the specified historical figure, even if off-site, or terminates a
+pregnancy. Useful for working around <a class="reference external" href="https://www.bay12games.com/dwarves/mantisbt/view.php?id=11549">Bug 11549</a>.</p>
+<p>Usage:</p>
+<div class="highlight-dfhack notranslate"><div class="highlight"><pre><span></span>devel/kill-hf [-p|--pregnancy] [-n|--dry-run] HISTFIG_ID
+</pre></div>
+</div>
+<p>Arguments:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">histfig_id</span></code>:</dt><dd><p>the ID of the historical figure to target</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-p</span></code>, <code class="docutils literal notranslate"><span class="pre">--pregnancy</span></code>:</dt><dd><p>if specified, and if the historical figure is pregnant, terminate the
+pregnancy instead of killing the historical figure</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-n</span></code>, <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code>:</dt><dd><p>if specified, only print the name of the historical figure</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="devel-light">
+<span id="id16"></span><h2><a class="toc-backref" href="#id53">devel/light</a><a class="headerlink" href="#devel-light" title="Permalink to this headline">¶</a></h2>
+<p>An experimental lighting engine for DF, using the <a class="reference internal" href="../Plugins.html#rendermax"><span class="std std-ref">rendermax</span></a> plugin.</p>
+<p>Call <code class="docutils literal notranslate"><span class="pre">devel/light</span> <span class="pre">static</span></code> to not recalculate lighting when in game.
+Press <kbd class="kbd docutils literal notranslate">~</kbd> to recalculate lighting. Press <kbd class="kbd docutils literal notranslate">`</kbd> to exit.</p>
+</div>
+<div class="section" id="devel-list-filters">
+<span id="id17"></span><h2><a class="toc-backref" href="#id54">devel/list-filters</a><a class="headerlink" href="#devel-list-filters" title="Permalink to this headline">¶</a></h2>
+<p>List input items for the building currently being built.
+This is where the filters in lua/dfhack/buildings.lua come from.</p>
+</div>
+<div class="section" id="devel-lsmem">
+<span id="id18"></span><h2><a class="toc-backref" href="#id55">devel/lsmem</a><a class="headerlink" href="#devel-lsmem" title="Permalink to this headline">¶</a></h2>
+<p>Prints memory ranges of the DF process. Useful for checking whether a pointer is
+valid, whether a certain library/plugin is loaded, etc.</p>
+</div>
+<div class="section" id="devel-lua-example">
+<span id="id19"></span><h2><a class="toc-backref" href="#id56">devel/lua-example</a><a class="headerlink" href="#devel-lua-example" title="Permalink to this headline">¶</a></h2>
+<p>An example Lua script which reports the number of times it has been called.
+Useful for testing environment persistence.</p>
+</div>
+<div class="section" id="devel-modstate-monitor">
+<span id="id20"></span><h2><a class="toc-backref" href="#id57">devel/modstate-monitor</a><a class="headerlink" href="#devel-modstate-monitor" title="Permalink to this headline">¶</a></h2>
+<p>Display changes in key modifier state, i.e. <kbd class="kbd docutils literal notranslate">Ctrl</kbd>/<kbd class="kbd docutils literal notranslate">Alt</kbd>/<kbd class="kbd docutils literal notranslate">Shift</kbd>.</p>
+<p>Arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">enable|start</dt>
+<dd class="field-odd"><p>Begin monitoring</p>
+</dd>
+<dt class="field-even">disable|stop</dt>
+<dd class="field-even"><p>End monitoring</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="devel-nuke-items">
+<span id="id21"></span><h2><a class="toc-backref" href="#id58">devel/nuke-items</a><a class="headerlink" href="#devel-nuke-items" title="Permalink to this headline">¶</a></h2>
+<p>Deletes ALL items not held by units, buildings or jobs.
+Intended solely for lag investigation.</p>
+</div>
+<div class="section" id="devel-pop-screen">
+<span id="id22"></span><h2><a class="toc-backref" href="#id59">devel/pop-screen</a><a class="headerlink" href="#devel-pop-screen" title="Permalink to this headline">¶</a></h2>
+<p>Forcibly closes the current screen. This is usually equivalent to pressing
+<kbd class="kbd docutils literal notranslate">Esc</kbd> (<code class="docutils literal notranslate"><span class="pre">LEAVESCREEN</span></code>), but will bypass the screen’s input handling. This is
+intended primarily for development, if you have created a screen whose input
+handling throws an error before it handles <kbd class="kbd docutils literal notranslate">Esc</kbd> (or if you have forgotten
+to handle <kbd class="kbd docutils literal notranslate">Esc</kbd> entirely).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you run this script when the current screen does not have a parent,
+this will cause DF to exit <strong>immediately</strong>. These screens include:</p>
+<ul class="simple">
+<li><p>The main fortress mode screen (<code class="docutils literal notranslate"><span class="pre">viewscreen_dwarfmodest</span></code>)</p></li>
+<li><p>The main adventure mode screen (<code class="docutils literal notranslate"><span class="pre">viewscreen_dungeonmodest</span></code>)</p></li>
+<li><p>The main legends mode screen (<code class="docutils literal notranslate"><span class="pre">viewscreen_legendsst</span></code>)</p></li>
+<li><p>The title screen (<code class="docutils literal notranslate"><span class="pre">viewscreen_titlest</span></code>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="devel-prepare-save">
+<span id="id23"></span><h2><a class="toc-backref" href="#id60">devel/prepare-save</a><a class="headerlink" href="#devel-prepare-save" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>THIS SCRIPT IS STRICTLY FOR DFHACK DEVELOPERS.</p>
+</div>
+<p>This script prepares the current savegame to be used
+with <a class="reference internal" href="#devel-find-offsets"><span class="std std-ref">devel/find-offsets</span></a>. It CHANGES THE GAME STATE
+to predefined values, and initiates an immediate
+<a class="reference internal" href="base.html#quicksave"><span class="std std-ref">quicksave</span></a>, thus PERMANENTLY MODIFYING the save.</p>
+</div>
+<div class="section" id="devel-print-args">
+<span id="id24"></span><h2><a class="toc-backref" href="#id61">devel/print-args</a><a class="headerlink" href="#devel-print-args" title="Permalink to this headline">¶</a></h2>
+<p>Prints all the arguments you supply to the script on their own line.
+Useful for debugging other scripts.</p>
+</div>
+<div class="section" id="devel-print-args2">
+<span id="id25"></span><h2><a class="toc-backref" href="#id62">devel/print-args2</a><a class="headerlink" href="#devel-print-args2" title="Permalink to this headline">¶</a></h2>
+<p>Prints all the arguments you supply to the script on their own line
+with quotes around them.</p>
+</div>
+<div class="section" id="devel-print-event">
+<span id="id26"></span><h2><a class="toc-backref" href="#id63">devel/print-event</a><a class="headerlink" href="#devel-print-event" title="Permalink to this headline">¶</a></h2>
+<p>Prints the description of an event by ID or index.</p>
+</div>
+<div class="section" id="devel-query">
+<span id="id27"></span><h2><a class="toc-backref" href="#id64">devel/query</a><a class="headerlink" href="#devel-query" title="Permalink to this headline">¶</a></h2>
+<p>Query is a script useful for finding and reading values of data structure fields.
+Purposes will likely be exclusive to writing lua script code.</p>
+<p>Fields: contents of tables
+Keys:   contents below non-table containers</p>
+<p>Keys and fields are essentially the same thing. The real difference is what
+code checks need to be in place for queries on keys vs fields. This is why
+they are differentiated.</p>
+<p>This is a recursive script which takes your selected data {table,unit,item,tile}
+and then iterates through it, then iterates through anything it finds. It does
+this recursively until it has walked over everything it is allowed. Everything
+it walks over it checks against any (optional) string/value queries, and if it
+finds a match it then prints it to the console.</p>
+<p>You can control most aspects of this process, the script is fairly flexible. So
+much so that you can easily create an infinitely recursing query and/or potentially
+crash Dwarf Fortress and DFHack. In previous iterations memory bloat was even a
+concern, where RAM would be used up in mere minutes or seconds; you can probably
+get this to happen as well if you are careless with the depth settings and don’t
+print everything walked over (i.e. have a search term). The <a class="reference internal" href="../Core.html#kill-lua"><span class="std std-ref">kill-lua</span></a> command
+may be able to stop this script if it gets out of control.</p>
+<p>Before recursing or printing things to the console the script checks several things.
+A few important ones:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Is the data structure capable of being iterated?</p></li>
+<li><p>Is the data structure pointing to a parent data structure?</p></li>
+<li><p>Is the current level of recursion too high, and do we need to unwind it first?</p></li>
+<li><p>Is the number of entries too high (eg. 70,000 table entries that would be printed)?</p></li>
+<li><p>Is the data going to be usefully readable?</p></li>
+<li><p>Does the field or key match the field or key query or queries?</p></li>
+<li><p>Is printing fields allowed?</p></li>
+<li><p>Is printing keys allowed?</p></li>
+</ul>
+</div></blockquote>
+<p>Examples:</p>
+<div class="highlight-dfhack notranslate"><div class="highlight"><pre><span></span>devel/query -table df -query dead
+devel/query -table df.global.ui.main -depth 0
+devel/query -table df.profession -querykeys WAR
+devel/query -unit -query STRENGTH
+devel/query -unit -query physical_attrs -listkeys
+devel/query -unit -getfield id
+</pre></div>
+</div>
+<p><strong>Selection options:</strong></p>
+<p>These options are used to specify where the query will run,
+or specifically what key to print inside a unit.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-unit</span></code>:              Selects the highlighted unit</p>
+<p><code class="docutils literal notranslate"><span class="pre">-item</span></code>:              Selects the highlighted item.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-tile</span></code>:              Selects the highlighted tile’s block and then attempts to find the tile, and perform your queries on it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-table</span> <span class="pre">&lt;value&gt;</span></code>:     Selects the specified table (ie. ‘value’).</p>
+<blockquote>
+<div><p>Must use dot notation to denote sub-tables.
+(eg. <code class="docutils literal notranslate"><span class="pre">-table</span> <span class="pre">df.global.world</span></code>)</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">-getfield</span> <span class="pre">&lt;value&gt;</span></code>:  Gets the specified field from the selected unit.</p>
+<blockquote>
+<div><p>Must use dot notation to denote sub-fields.
+Useful if there would be several matching
+fields with the input as a substring (eg. ‘id’, ‘gui’)</p>
+</div></blockquote>
+<p><strong>Query options:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">-query</span> <span class="pre">&lt;value&gt;</span></code>:     Searches the selection for fields with substrings matching the specified value.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-querykeys</span> <span class="pre">&lt;value&gt;</span></code>: Lists only keys matching the specified value.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-listall</span></code>:           Lists both fields and keys, useful if you aren’t running a search.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-listfields</span></code>:        Lists fields. Useful if you aren’t running a search.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-listkeys</span></code>:          Lists keys. Useful. Ya, period.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-depth</span> <span class="pre">&lt;value&gt;</span></code>:          Limits the field recursion depth (default: 10)</p>
+<p><code class="docutils literal notranslate"><span class="pre">-keydepth</span> <span class="pre">&lt;value&gt;</span></code>:       Limits the key recursion depth (default: 4)</p>
+<p><code class="docutils literal notranslate"><span class="pre">-maxtablelength</span> <span class="pre">&lt;value&gt;</span></code>: Limits the table sizes that will be walked (default: 257)</p>
+<p><code class="docutils literal notranslate"><span class="pre">-includeitall</span></code>:  Removes blacklist filtering, and disregards readability of output.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-safer</span></code>:         Disables walking struct data.</p>
+<blockquote>
+<div><p>Unlike native Lua types, struct data can sometimes be misaligned,
+which can cause crashes when accessing it. This option may be useful
+if you’re running an alpha or beta build of DFHack.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">-dumb</span></code>:          Disables intelligent checks for things such as reasonable
+recursion depth (i.e. depth maximums are increased, not removed) and also checks
+for recursive data structures (i.e. to avoid walking a child that goes to a
+parent)</p>
+<p><strong>Command options:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">-debug</span> <span class="pre">&lt;value&gt;</span></code>: Enables debug log lines equal to or less than the value
+provided. Some lines are commented out entirely, and you probably won’t even use
+this.. but hey, now you know it exists.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-disableprint</span></code>: Disables printing fields and keys. Might be useful if you are
+debugging this script. Or to see if a query will crash (faster) but not sure
+what else you could use it for.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-help</span></code>: Prints this help information.</p>
+</div>
+<div class="section" id="devel-save-version">
+<span id="id28"></span><h2><a class="toc-backref" href="#id65">devel/save-version</a><a class="headerlink" href="#devel-save-version" title="Permalink to this headline">¶</a></h2>
+<p>Display DF version information about the current save</p>
+</div>
+<div class="section" id="devel-sc">
+<span id="id29"></span><h2><a class="toc-backref" href="#id66">devel/sc</a><a class="headerlink" href="#devel-sc" title="Permalink to this headline">¶</a></h2>
+<p>Size Check: scans structures for invalid vectors, misaligned structures,
+and unidentified enum values.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This script can take a very long time to complete, and DF may be
+unresponsive while it is running. You can use <a class="reference internal" href="../Core.html#kill-lua"><span class="std std-ref">kill-lua</span></a> to interrupt
+this script.</p>
+</div>
+<p>Examples:</p>
+<ul>
+<li><p>scan world:</p>
+<div class="highlight-dfhack notranslate"><div class="highlight"><pre><span></span>devel/sc
+</pre></div>
+</div>
+</li>
+<li><p>scan all globals:</p>
+<div class="highlight-dfhack notranslate"><div class="highlight"><pre><span></span>devel/sc -all
+</pre></div>
+</div>
+</li>
+<li><p>scan result of expression:</p>
+<div class="highlight-dfhack notranslate"><div class="highlight"><pre><span></span>devel/sc [expr]
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="devel-scanitemother">
+<span id="id30"></span><h2><a class="toc-backref" href="#id67">devel/scanitemother</a><a class="headerlink" href="#devel-scanitemother" title="Permalink to this headline">¶</a></h2>
+<p>List indices in <code class="docutils literal notranslate"><span class="pre">world.item.other[]</span></code> where current selected item appears.</p>
+</div>
+<div class="section" id="devel-send-key">
+<span id="id31"></span><h2><a class="toc-backref" href="#id68">devel/send-key</a><a class="headerlink" href="#devel-send-key" title="Permalink to this headline">¶</a></h2>
+<p>Send a key to the current screen or a parent. If you are trying to dismiss
+a screen, <a class="reference internal" href="#devel-pop-screen"><span class="std std-ref">devel/pop-screen</span></a> may be more useful, particularly if the screen
+is unresponsive to <code class="docutils literal notranslate"><span class="pre">Esc</span></code>.</p>
+<p>Usage:</p>
+<div class="highlight-dfhack notranslate"><div class="highlight"><pre><span></span>devel/send-key KEY_NAME [X]
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">KEY_NAME</span></code> is the name of an <code class="docutils literal notranslate"><span class="pre">interface_key</span></code> - a full list of valid
+names can be obtained by running <code class="docutils literal notranslate"><span class="pre">lua</span> <span class="pre">&#64;df.interface_key</span></code>, looking in
+<code class="docutils literal notranslate"><span class="pre">data/init/interface.txt</span></code>, or by checking <code class="docutils literal notranslate"><span class="pre">df.keybindings.xml</span></code> in
+the df-structures repository.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X</span></code> (optional) - if specified, the key is sent to the screen <code class="docutils literal notranslate"><span class="pre">X</span></code> screens
+above the current screen in the screen stack (e.g. <code class="docutils literal notranslate"><span class="pre">1</span></code> corresponds to the
+current screen’s parent)</p></li>
+</ul>
+</div>
+<div class="section" id="devel-spawn-unit-helper">
+<span id="id32"></span><h2><a class="toc-backref" href="#id69">devel/spawn-unit-helper</a><a class="headerlink" href="#devel-spawn-unit-helper" title="Permalink to this headline">¶</a></h2>
+<p>Setup stuff to allow arena creature spawn after a mode change.</p>
+<p>With Arena spawn data initialized:</p>
+<ul class="simple">
+<li><p>enter the <kbd class="kbd docutils literal notranslate">k</kbd> menu and change mode using
+<code class="docutils literal notranslate"><span class="pre">rb_eval</span> <span class="pre">df.gametype</span> <span class="pre">=</span> <span class="pre">:DWARF_ARENA</span></code></p></li>
+<li><p>spawn creatures (<kbd class="kbd docutils literal notranslate">c</kbd> ingame)</p></li>
+<li><p>revert to game mode using <code class="docutils literal notranslate"><span class="pre">rb_eval</span> <span class="pre">df.gametype</span> <span class="pre">=</span> <span class="pre">#{df.gametype.inspect}</span></code></p></li>
+<li><p>To convert spawned creatures to livestock, select each one with
+the <kbd class="kbd docutils literal notranslate">v</kbd> menu, and enter <code class="docutils literal notranslate"><span class="pre">rb_eval</span> <span class="pre">df.unit_find.civ_id</span> <span class="pre">=</span> <span class="pre">df.ui.civ_id</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="devel-test-perlin">
+<span id="id33"></span><h2><a class="toc-backref" href="#id70">devel/test-perlin</a><a class="headerlink" href="#devel-test-perlin" title="Permalink to this headline">¶</a></h2>
+<p>Generates an image using multiple octaves of perlin noise.</p>
+</div>
+<div class="section" id="devel-unforbidall">
+<span id="id34"></span><h2><a class="toc-backref" href="#id71">devel/unforbidall</a><a class="headerlink" href="#devel-unforbidall" title="Permalink to this headline">¶</a></h2>
+<p>Unforbid all items.</p>
+</div>
+<div class="section" id="devel-unit-path">
+<span id="id35"></span><h2><a class="toc-backref" href="#id72">devel/unit-path</a><a class="headerlink" href="#devel-unit-path" title="Permalink to this headline">¶</a></h2>
+<p>Show the internal path a unit is currently following.</p>
+</div>
+<div class="section" id="devel-visualize-structure">
+<span id="id36"></span><h2><a class="toc-backref" href="#id73">devel/visualize-structure</a><a class="headerlink" href="#devel-visualize-structure" title="Permalink to this headline">¶</a></h2>
+<p>Displays the raw memory of a structure, separated by field.
+Useful for checking if structures are aligned.</p>
+</div>
+<div class="section" id="devel-watch-minecarts">
+<span id="id37"></span><h2><a class="toc-backref" href="#id74">devel/watch-minecarts</a><a class="headerlink" href="#devel-watch-minecarts" title="Permalink to this headline">¶</a></h2>
+<p>Logs minecart coordinates and speeds to console.</p>
+<p>Usage:  <code class="docutils literal notranslate"><span class="pre">devel/watch-minecarts</span> <span class="pre">start|stop</span></code></p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2015-2021, The DFHack Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/_auto/devel.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

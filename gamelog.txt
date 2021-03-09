@@ -1,0 +1,16 @@
+*** STARTING NEW GAME ***
+*** STARTING NEW GAME ***
+*** STARTING NEW GAME ***
+*** STARTING NEW GAME ***
+*** STARTING NEW GAME ***
+*** STARTING NEW GAME ***
+*** STARTING NEW GAME ***
+*** STARTING NEW GAME ***
+*** STARTING NEW GAME ***
+Generating world using parameter set CREATE WORLD NOW = 3333344
+ Seed: 24yyie8ca6UAIui0oguU
+ History Seed: UgCEu6M0ewIWm2G0SyOs
+ Name Seed: qeoyKMkioU2owksggkG6
+ Creature Seed: SKC08EqQyk8eEmO8uycU
+Nothing has arrived on the calendar.
+The weather has cleared.
